@@ -26,6 +26,16 @@ public class SecurityConfig {
 
   @Autowired
   public void configure(AuthenticationManagerBuilder auth) throws Exception {
+	   auth
+	      .ldapAuthentication()
+	         .userSearchFilter("(uid={0})")
+	         .contextSource()
+	            .url("ldap://ldap.forumsys.com:389/dc=example,dc=com")
+	            .managerDn("cn=read-only-admin,dc=example,dc=com")
+	            .managerPassword("password");
+	}
+  
+  /*public void configure(AuthenticationManagerBuilder auth) throws Exception {
 	  auth
       .ldapAuthentication()
       .userSearchFilter("(uid={0})")
@@ -37,7 +47,7 @@ public class SecurityConfig {
       .port(389)
       .managerDn("cn=read-only-admin,dc=example,dc=com")
       .managerPassword("password");
-  }
+  } */
   /*public void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth
       .ldapAuthentication()
